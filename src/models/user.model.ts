@@ -28,8 +28,8 @@ const userSchema = new Schema(
       minlength: 3,
       maxlength: 255
     },
-    roles: {
-      type: Array,
+    role: {
+      type: String,
       required: true
     }
   },

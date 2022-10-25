@@ -21,6 +21,8 @@ class UserRoutes {
       this.UserController.loginUser
     );
 
+    this.router.post('/logout', this.UserController.logoutUser);
+
     this.router.post(
       '/register',
       this.UserValidator.newUser,

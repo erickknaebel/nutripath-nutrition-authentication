@@ -18,17 +18,29 @@ class UserService {
    * @returns an object containing the user
    */
   public loginUser = async (body: IUser): Promise<IUser> => {
-    const data = await User.findOne({ email: body.email });
-    if (!data) {
+    const userData = await User.findOne({ email: body.email });
+    if (!userData) {
       return null;
     } else {
-      if (await crypt.compare(body.password, data.password)) {
+      if (await crypt.compare(body.password, userData.password)) {
+        const data = userData.toJSON();
+        delete data.password;
+        delete data.__v;
         data.token = this.UserToken.generate(body);
         return data;
       } else {
         return null;
       }
     }
+  };
+
+  /**
+   * Service method to login the user in
+   * @param {Object} body
+   * @returns an object containing the user
+   */
+  public logoutUser = async (): Promise<any> => {
+    return null;
   };
 
   /**
@@ -44,7 +56,7 @@ class UserService {
       await Role.findOne({ name: { $eq: Roles.USER_ROLE } }).then(
         (res: IRole) => {
           const data = res.toJSON();
-          const r: string = data._id;
+          const r: string = data.name;
           userRoles.push(r);
           body.roles = userRoles;
         }
@@ -74,7 +86,7 @@ class UserService {
         .lean()
         .then((res: IRole[]) => {
           res.forEach((type) => {
-            userRoles.push(type._id);
+            userRoles.push(type.name);
           });
           body.roles = userRoles;
         });

@@ -29,11 +29,27 @@ class UserController {
       res
         .header({ Authorization: data.token })
         .status(HttpStatus.CREATED)
-        .json({
-          code: HttpStatus.CREATED,
-          data: data,
-          message: User.USER_LOGGED_IN
-        });
+        .json(data);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  /**
+   * Controller to log a user out
+   * @param {object} Request - request object
+   * @param {object} Response - response object
+   * @param {Function} NextFunction
+   */
+  public logoutUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.UserService.logoutUser();
+      console.log('log user out...');
+      res.json(data);
     } catch (error) {
       next(error);
     }
@@ -58,11 +74,7 @@ class UserController {
           message: User.USER_EXISTS
         });
       }
-      res.status(HttpStatus.CREATED).json({
-        code: HttpStatus.CREATED,
-        data: data,
-        message: User.USER_CREATED
-      });
+      res.status(HttpStatus.CREATED).json(data);
     } catch (error) {
       next(error);
     }
@@ -87,11 +99,7 @@ class UserController {
           message: User.USER_EXISTS
         });
       }
-      res.status(HttpStatus.CREATED).json({
-        code: HttpStatus.CREATED,
-        data: data,
-        message: User.USER_CREATED
-      });
+      res.status(HttpStatus.CREATED).json(data);
     } catch (error) {
       next(error);
     }
@@ -110,11 +118,7 @@ class UserController {
   ): Promise<any> => {
     try {
       const data = await this.UserService.getAllUsers();
-      res.status(HttpStatus.OK).json({
-        code: HttpStatus.OK,
-        data: data,
-        message: User.USERS_FETCHED
-      });
+      res.status(HttpStatus.OK).json(data);
     } catch (error) {
       next(error);
     }
@@ -133,11 +137,7 @@ class UserController {
   ): Promise<any> => {
     try {
       const data = await this.UserService.getUser(req.params._id);
-      res.status(HttpStatus.OK).json({
-        code: HttpStatus.OK,
-        data: data,
-        message: User.USER_FETCHED
-      });
+      res.status(HttpStatus.OK).json(data);
     } catch (error) {
       next(error);
     }
@@ -156,11 +156,7 @@ class UserController {
   ): Promise<any> => {
     try {
       const data = await this.UserService.updateUser(req.params._id, req.body);
-      res.status(HttpStatus.ACCEPTED).json({
-        code: HttpStatus.ACCEPTED,
-        data: data,
-        message: User.USER_UPDATED
-      });
+      res.status(HttpStatus.ACCEPTED).json(data);
     } catch (error) {
       next(error);
     }
