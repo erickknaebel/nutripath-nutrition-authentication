@@ -38,7 +38,7 @@ class RoleController {
    * @param {object} Response - response object
    * @param {Function} NextFunction
    */
-   public getUserRole = async (
+  public getUserRole = async (
     req: Request,
     res: Response,
     next: NextFunction
