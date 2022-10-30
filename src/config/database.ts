@@ -8,10 +8,15 @@ class Database {
   private logger;
 
   constructor() {
+    // this.DATABASE =
+    //   process.env.NODE_ENV === 'test'
+    //     ? process.env.DATABASE_TEST
+    //     : process.env.DATABASE;
+
     this.DATABASE =
       process.env.NODE_ENV === 'test'
         ? process.env.DATABASE_TEST
-        : process.env.DATABASE;
+        : process.env.MONGODB_URI;
 
     this.logger = Logger.logger;
   }
