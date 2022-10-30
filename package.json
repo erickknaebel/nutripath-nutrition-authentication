@@ -51,6 +51,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mocha": "^8.0.3",
     "@types/mongoose": "^5.7.36",
+    "@types/node": "^18.11.8",
     "@types/sinon": "^9.0.9",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
